@@ -10,10 +10,10 @@ public class RoomVO {
 		setFloor(floor);
 		setRoomType(roomType);
 	}
-	
-	public RoomVO(int roomNumber, int roomType){
-		this(roomNumber, 0, roomType);
-	}
+	//이거 필요없을 듯?
+//	public RoomVO(int roomNumber, int roomType){
+//		this(roomNumber, 0, roomType);
+//	}
 	
 	
 	public int getRoomNumber() {
@@ -35,6 +35,11 @@ public class RoomVO {
 	}
 	public void setRoomType(int roomType) {
 		this.roomType = roomType;
+	}
+
+	@Override
+	public String toString() {
+		return "roomNumber=" + roomNumber + ", floor=" + floor + ", roomType=" + roomType + "\n";
 	}
 	
 }

@@ -146,4 +146,13 @@ public class StudentVO {
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		return "domStudentId=" + domStudentId + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", note="
+				+ note + ", roomNumber=" + roomNumber + ", studentNumber=" + studentNumber + ", name=" + name
+				+ ", major=" + major + ", grade=" + grade + ", term=" + term + ", academicStatus=" + academicStatus
+				+ ", birth=" + birth + ", gender=" + gender + ", phoneNumber=" + phoneNumber + ", address=" + address
+				+ "\n";
+	}
+	
 }
