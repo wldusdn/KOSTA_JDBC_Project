@@ -5,8 +5,8 @@ import java.util.Date;
 public class ManagerVO {
 	private String loginIp;
 	private Date loginDateTime;
-	
-	public ManagerVO(String loginIp, Date loginDateTime, String name) {
+	public ManagerVO() {};
+	public ManagerVO(String loginIp, Date loginDateTime) {
 		setLoginIp(loginIp);
 		setLoginDateTime(loginDateTime);
 	}
@@ -22,5 +22,10 @@ public class ManagerVO {
 	public void setLoginDateTime(Date loginDateTime) {
 		this.loginDateTime = loginDateTime;
 	}
+	@Override
+	public String toString() {
+		return "loginIp=" + loginIp + ", loginDateTime=" + loginDateTime;
+	}
+	
 	
 }
