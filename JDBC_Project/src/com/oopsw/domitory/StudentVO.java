@@ -19,6 +19,7 @@ public class StudentVO {
 	private String phoneNumber;
 	private String address;
 	
+	//학생 상세조회
 	public StudentVO(String domStudentId, int studentNumber, String name, String major, int grade, int term, String academicStatus, Date birth, String gender,
 			String phoneNumber, String address, Date checkIn, Date checkOut, String note, int roomNumber) {
 		setDomStudentId(domStudentId);
@@ -38,19 +39,23 @@ public class StudentVO {
 		setNote(note);
 	}
 	
+	//학생관리에서 조회
 	public StudentVO(String domStudentId, int studentNumber, String name, String academicStatus, String gender, int roomNumber, Date checkIn, Date checkOut) {
 		this(domStudentId, studentNumber, name, null, 0, 0, academicStatus,  null, gender, null, null, checkIn, checkOut, null, roomNumber);
 	}
-
+	
+	//학번검색
 	public StudentVO(int studentNumber, String name, String major, int grade, int term, String academicStatus,
 			Date birth, String gender, String phoneNumber, String address) {
 		this(null, studentNumber, name, major, grade, term, academicStatus, birth, gender, phoneNumber, address, null, null, null, 0);
 	}
 	
+	//방배정에서 조회
 	public StudentVO(String name, String major, int grade, int studentNumber, String gender){
 		this(null, studentNumber, name, major, grade, 0, null, null, gender, null, null, null, null, null, 0);
 	}
 	
+	//특정 방 거주학생 조회
 	public StudentVO(String name, String major, int grade, int studentNumber){
 		this(null, studentNumber, name, major, grade, 0, null, null, null, null, null, null, null, null, 0);
 	}
