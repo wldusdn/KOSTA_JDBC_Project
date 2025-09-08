@@ -44,7 +44,7 @@ public class ManagerDAOImpl implements ManagerDAO{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			int i = pstmt.executeUpdate();
-			if(i == 1) result = true;
+			result = i == 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,7 +54,7 @@ public class ManagerDAOImpl implements ManagerDAO{
 	@Override
 	public ManagerVO getLog(String id) {
 		String sql = "select login_ip, login_date_time from manager_log where login_number = (select max(login_number) from manager_log where manager_id = ?)";
-		ManagerVO m = new ManagerVO();
+		ManagerVO m = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);

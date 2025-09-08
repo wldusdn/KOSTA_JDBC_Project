@@ -11,7 +11,7 @@ public interface StudentDAO {
 	//특정학생수정
 	boolean updateDomStudent(String domStudentId, int roomNumber, String checkIn, String checkOut, String note);
 	//특정학생삭제
-	boolean deleteStudent(String domStudentId);
+	boolean deleteDomStudent(String domStudentId);
 	//학번검색
 	StudentVO getStudent(int studentNumber);
 	//특정학생등록

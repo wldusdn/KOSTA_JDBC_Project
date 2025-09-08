@@ -27,10 +27,11 @@ public class StudentDAOImpl implements StudentDAO{
 	@Override
 	public Collection<StudentVO> getDomStudents() {
 		String sql = "select d.dom_student_id, s.name, s.student_number, s.academic_status, s.gender, d.room_number, d.check_in, d.expected_check_out from dom_student d, student s where s.student_number = d.student_number and d.expected_check_out >= sysdate";
-		Collection list = new ArrayList<StudentVO>();
+		Collection list = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
+			list = new ArrayList<StudentVO>();
 			while(rs.next()) list.add(new StudentVO(rs.getString(1), rs.getInt(3), rs.getString(2), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getDate(7), rs.getDate(8)));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +64,7 @@ public class StudentDAOImpl implements StudentDAO{
 			pstmt.setString(4, note);
 			pstmt.setString(5, domStudentId);
 			int i = pstmt.executeUpdate();
-			if (i == 1) return true;
+			return i == 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -71,13 +72,13 @@ public class StudentDAOImpl implements StudentDAO{
 	}
 
 	@Override
-	public boolean deleteStudent(String domStudentId) {
+	public boolean deleteDomStudent(String domStudentId) {
 		String sql = "delete from dom_student where dom_student_id = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, domStudentId);
 			int i = pstmt.executeUpdate();
-			if (i == 1) return true;
+			return i == 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -111,7 +112,7 @@ public class StudentDAOImpl implements StudentDAO{
 			pstmt.setDate(5, java.sql.Date.valueOf(checkOut));
 			pstmt.setString(6, note);
 			int i = pstmt.executeUpdate();
-			if (i == 1) return true;
+			return i == 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -121,11 +122,12 @@ public class StudentDAOImpl implements StudentDAO{
 	@Override
 	public Collection<StudentVO> searchName(String name) {
 		String sql = "select d.dom_student_id, s.name, s.student_number, s.academic_status, s.gender, d.room_number, d.check_in, d.expected_check_out from dom_student d, student s where s.student_number = d.student_number and s.name like '%' || ? || '%' and d.expected_check_out >= sysdate";
-		Collection list = new ArrayList<StudentVO>();
+		Collection list = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			ResultSet rs = pstmt.executeQuery();
+			list = new ArrayList<StudentVO>();
 			while(rs.next()) list.add(new StudentVO(rs.getString(1), rs.getInt(3), rs.getString(2), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getDate(7), rs.getDate(8)));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -136,11 +138,12 @@ public class StudentDAOImpl implements StudentDAO{
 	@Override
 	public Collection<StudentVO> searchMajor(String major) {
 		String sql = "select d.dom_student_id, s.name, s.student_number, s.academic_status, s.gender, d.room_number, d.check_in, d.expected_check_out from dom_student d, student s where s.student_number = d.student_number and s.major like '%' || ? || '%' and d.expected_check_out >= sysdate";
-		Collection list = new ArrayList<StudentVO>();
+		Collection list = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, major);
 			ResultSet rs = pstmt.executeQuery();
+			list = new ArrayList<StudentVO>();
 			while(rs.next()) list.add(new StudentVO(rs.getString(1), rs.getInt(3), rs.getString(2), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getDate(7), rs.getDate(8)));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -151,11 +154,12 @@ public class StudentDAOImpl implements StudentDAO{
 	@Override
 	public Collection<StudentVO> searchAcademicStatus(String academicStatus) {
 		String sql = "select d.dom_student_id, s.name, s.student_number, s.gender, d.room_number, d.check_in, d.expected_check_out from dom_student d, student s where s.student_number = d.student_number and s.academic_status = ? and d.expected_check_out >= sysdate";
-		Collection list = new ArrayList<StudentVO>();
+		Collection list = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, academicStatus);
 			ResultSet rs = pstmt.executeQuery();
+			list = new ArrayList<StudentVO>();
 			while(rs.next()) list.add(new StudentVO(rs.getString(1), rs.getInt(3), rs.getString(2), academicStatus, rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getDate(7)));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,11 +170,12 @@ public class StudentDAOImpl implements StudentDAO{
 	@Override
 	public Collection<StudentVO> searchRoomNumber(int roomNumber) {
 		String sql = "select d.dom_student_id, s.name, s.student_number, s.academic_status, s.gender, d.check_in, d.expected_check_out from dom_student d, student s where s.student_number = d.student_number and d.room_number = ? and d.expected_check_out >= sysdate";
-		Collection list = new ArrayList<StudentVO>();
+		Collection list = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, roomNumber);
 			ResultSet rs = pstmt.executeQuery();
+			list = new ArrayList<StudentVO>();
 			while(rs.next()) list.add(new StudentVO(rs.getString(1), rs.getInt(3), rs.getString(2), rs.getString(4), rs.getString(5), roomNumber, rs.getDate(6), rs.getDate(7)));
 		} catch (SQLException e) {
 			e.printStackTrace();
